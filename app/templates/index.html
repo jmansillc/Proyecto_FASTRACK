@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastrack — Validador de Precios | Movistar</title>
+    <meta name="description" content="Sistema de validación de archivos Excel de precios residenciales — Movistar">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Telefonica+Sans:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <!-- ====== BARRA SUPERIOR MOVISTAR ====== -->
+    <header class="barra-superior">
+        <div class="logo-area">
+            <div class="logo-movistar">
+                <div class="logo-m">M</div>
+                <span class="logo-texto">movistar</span>
+            </div>
+            <div class="divider-logo"></div>
+            <span class="nombre-app">Fastrack Validador</span>
+        </div>
+        <span class="usuario-info">Gestión de Precios</span>
+    </header>
+
+    <!-- ====== FRANJA AZUL HERO ====== -->
+    <section class="franja-azul">
+        <div class="franja-contenido">
+            <h1>Validador de Precios Residenciales</h1>
+            <p>Sube tu archivo Excel para ejecutar validaciones automáticas de calidad de datos</p>
+        </div>
+    </section>
+
+    <!-- ====== CONTENIDO PRINCIPAL ====== -->
+    <main class="contenedor">
+
+        <!-- Tarjeta de carga de archivo -->
+        <div class="tarjeta-carga">
+            <div class="zona-drop" id="zonaDrop">
+                <div class="icono-carga">📄</div>
+                <h3>Arrastra tu archivo Excel aquí</h3>
+                <p>o haz clic para seleccionarlo — Solo archivos .xlsx</p>
+                <input type="file" id="inputArchivo" accept=".xlsx">
+            </div>
+
+            <div class="nombre-archivo-seleccionado" id="archivoInfo">
+                <span class="icono-archivo">📎</span>
+                <span id="textoArchivo"></span>
+            </div>
+
+            <button class="boton-movistar" id="botonValidar" disabled>
+                Validar archivo
+            </button>
+
+            <div class="barra-progreso" id="barraProgreso">
+                <div class="relleno"></div>
+            </div>
+        </div>
+
+        <!-- Panel de resumen global -->
+        <div class="panel-resumen" id="panelResumen"></div>
+
+        <!-- Panel de correcciones automáticas -->
+        <div class="panel-correcciones" id="panelCorrecciones" style="display:none;"></div>
+
+        <!-- Lista de tarjetas de validación -->
+        <div class="lista-validaciones" id="listaValidaciones"></div>
+
+        <!-- Botones de acción finales -->
+        <div class="acciones-finales" id="accionesFinales" style="display:none;">
+            <button class="boton-descarga" id="botonDescargarCorregido">
+                ⬇️ Descargar Excel con correcciones automáticas
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="pie-pagina">
+        Telefónica Movistar — Fastrack Validador de Precios v3.0 · Uso interno
+    </footer>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script src="/static/js/app.js"></script>
+
+</body>
+
+</html>

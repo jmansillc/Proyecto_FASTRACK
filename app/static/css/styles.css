@@ -1,0 +1,910 @@
+/* =================================================================
+   MOVISTAR DESIGN SYSTEM — Variables
+   ================================================================= */
+:root {
+    /* Colores Movistar */
+    --movistar-azul: #019DF4;
+    --movistar-azul-oscuro: #0B2739;
+    --movistar-azul-medio: #0F3A56;
+    --movistar-azul-hover: #0085D0;
+    --movistar-cielo: #E6F6FF;
+    --movistar-verde: #5CB615;
+    --movistar-verde-fondo: rgba(92, 182, 21, 0.08);
+    --movistar-rojo: #E63737;
+    --movistar-rojo-fondo: rgba(230, 55, 55, 0.06);
+    --movistar-naranja: #F28D15;
+    --movistar-naranja-fondo: rgba(242, 141, 21, 0.08);
+    --movistar-gris-100: #F6F8FA;
+    --movistar-gris-200: #E8ECF1;
+    --movistar-gris-300: #CDD4DC;
+    --movistar-gris-500: #86929E;
+    --movistar-gris-700: #50575E;
+    --movistar-gris-900: #1A1C20;
+
+    /* Superficies */
+    --fondo: #FAFBFC;
+    --superficie: #FFFFFF;
+    --texto: var(--movistar-gris-900);
+    --texto-secundario: var(--movistar-gris-500);
+    --borde: var(--movistar-gris-200);
+
+    /* Layout */
+    --radio: 16px;
+    --radio-sm: 10px;
+    --sombra-sutil: 0 1px 3px rgba(11, 39, 57, 0.06);
+    --sombra-media: 0 4px 16px rgba(11, 39, 57, 0.08);
+    --sombra-elevada: 0 8px 32px rgba(11, 39, 57, 0.12);
+    --transicion: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =================================================================
+   RESET
+   ================================================================= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Telefonica Sans', -apple-system, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =================================================================
+   HEADER — BARRA MOVISTAR
+   ================================================================= */
+.barra-superior {
+    width: 100%;
+    background: var(--movistar-azul-oscuro);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-movistar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-m {
+    width: 36px;
+    height: 36px;
+    background: var(--movistar-azul);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+    letter-spacing: -1px;
+}
+
+.logo-texto {
+    color: white;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.divider-logo {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nombre-app {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.usuario-info {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+}
+
+/* =================================================================
+   FRANJA AZUL MOVISTAR
+   ================================================================= */
+.franja-azul {
+    background: linear-gradient(135deg, var(--movistar-azul), #0081CC);
+    padding: 40px 32px 48px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.franja-azul::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+
+.franja-azul::after {
+    content: '';
+    position: absolute;
+    bottom: -60%;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.franja-contenido {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.franja-azul h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.franja-azul p {
+    opacity: 0.85;
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+/* =================================================================
+   CONTENIDO PRINCIPAL
+   ================================================================= */
+.contenedor {
+    max-width: 900px;
+    margin: -24px auto 48px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+/* =================================================================
+   TARJETA DE CARGA
+   ================================================================= */
+.tarjeta-carga {
+    background: var(--superficie);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-elevada);
+    padding: 40px;
+    text-align: center;
+    transition: var(--transicion);
+    border: 2px solid transparent;
+}
+
+.zona-drop {
+    border: 2px dashed var(--movistar-gris-300);
+    border-radius: var(--radio-sm);
+    padding: 48px 32px;
+    cursor: pointer;
+    transition: var(--transicion);
+    position: relative;
+    background: var(--movistar-gris-100);
+}
+
+.zona-drop:hover,
+.zona-drop.arrastrando {
+    border-color: var(--movistar-azul);
+    background: var(--movistar-cielo);
+}
+
+.zona-drop input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.icono-carga {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, var(--movistar-azul), #0081CC);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 16px rgba(1, 157, 244, 0.25);
+}
+
+.zona-drop h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--texto);
+    margin-bottom: 4px;
+}
+
+.zona-drop p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+}
+
+.nombre-archivo-seleccionado {
+    margin-top: 16px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--movistar-cielo);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--movistar-azul-oscuro);
+    font-weight: 500;
+}
+
+.nombre-archivo-seleccionado .icono-archivo {
+    font-size: 1.1rem;
+}
+
+/* =================================================================
+   BOTÓN MOVISTAR
+   ================================================================= */
+.boton-movistar {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px 28px;
+    background: var(--movistar-azul);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion);
+    display: none;
+    letter-spacing: 0.2px;
+}
+
+.boton-movistar:hover {
+    background: var(--movistar-azul-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(1, 157, 244, 0.3);
+}
+
+.boton-movistar:active {
+    transform: translateY(0);
+}
+
+.boton-movistar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* =================================================================
+   BARRA DE PROGRESO MOVISTAR
+   ================================================================= */
+.barra-progreso {
+    width: 100%;
+    height: 4px;
+    background: var(--movistar-gris-200);
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
+    display: none;
+}
+
+.barra-progreso .relleno {
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, var(--movistar-azul), #5CC0F7);
+    border-radius: 2px;
+    animation: carga 1.4s infinite ease-in-out;
+}
+
+@keyframes carga {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+/* =================================================================
+   RESUMEN
+   ================================================================= */
+.panel-resumen {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: var(--radio);
+    display: none;
+    animation: entrar 0.4s ease-out;
+    background: var(--superficie);
+    box-shadow: var(--sombra-media);
+}
+
+.panel-resumen.exito {
+    border-left: 4px solid var(--movistar-verde);
+}
+
+.panel-resumen.error {
+    border-left: 4px solid var(--movistar-rojo);
+}
+
+.resumen-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.resumen-icono {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.panel-resumen.exito .resumen-icono {
+    background: var(--movistar-verde-fondo);
+}
+
+.panel-resumen.error .resumen-icono {
+    background: var(--movistar-rojo-fondo);
+}
+
+.resumen-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.metricas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.metrica {
+    text-align: center;
+    padding: 16px;
+    border-radius: var(--radio-sm);
+    background: var(--movistar-gris-100);
+}
+
+.metrica .numero {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.metrica .etiqueta {
+    font-size: 0.75rem;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.metrica.exito .numero {
+    color: var(--movistar-verde);
+}
+
+.metrica.error .numero {
+    color: var(--movistar-rojo);
+}
+
+.metrica.total .numero {
+    color: var(--movistar-azul);
+}
+
+/* =================================================================
+   TARJETAS DE VALIDACIÓN
+   ================================================================= */
+.lista-validaciones {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tarjeta {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-sm);
+    overflow: hidden;
+    animation: entrar 0.35s ease-out;
+    animation-fill-mode: both;
+    box-shadow: var(--sombra-sutil);
+}
+
+.tarjeta .cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.tarjeta .cabecera:hover {
+    background: var(--movistar-gris-100);
+}
+
+.tarjeta .info-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.punto-estado {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.punto-estado.ok {
+    background: var(--movistar-verde);
+    box-shadow: 0 0 0 3px var(--movistar-verde-fondo);
+}
+
+.punto-estado.fallo {
+    background: var(--movistar-rojo);
+    box-shadow: 0 0 0 3px var(--movistar-rojo-fondo);
+}
+
+.tarjeta .nombre-validacion {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--texto);
+}
+
+.info-derecha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.ok {
+    color: var(--movistar-verde);
+    background: var(--movistar-verde-fondo);
+}
+
+.badge.fallo {
+    color: var(--movistar-rojo);
+    background: var(--movistar-rojo-fondo);
+}
+
+.flecha-expandir {
+    font-size: 0.7rem;
+    color: var(--texto-secundario);
+    transition: var(--transicion);
+}
+
+.tarjeta.abierta .flecha-expandir {
+    transform: rotate(180deg);
+}
+
+.tarjeta .panel-detalle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+}
+
+.tarjeta.abierta .panel-detalle {
+    max-height: 2000px;
+    overflow-y: auto;
+}
+
+.detalle-interior {
+    padding: 0 20px 16px;
+    border-top: 1px solid var(--borde);
+    padding-top: 16px;
+}
+
+.fila-dato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.83rem;
+    border-bottom: 1px solid var(--movistar-gris-100);
+}
+
+.fila-dato:last-child {
+    border-bottom: none;
+}
+
+.fila-dato .clave {
+    color: var(--texto-secundario);
+}
+
+.fila-dato .valor {
+    font-weight: 600;
+}
+
+.bloque-error {
+    margin-top: 8px;
+    padding: 12px 14px;
+    background: var(--movistar-rojo-fondo);
+    border-radius: 8px;
+    border-left: 3px solid var(--movistar-rojo);
+    font-size: 0.82rem;
+}
+
+.bloque-error .titulo-error {
+    font-weight: 600;
+    color: var(--movistar-rojo);
+    margin-bottom: 2px;
+}
+
+.bloque-advertencia {
+    margin-top: 8px;
+    padding: 12px 14px;
+    background: var(--movistar-naranja-fondo);
+    border-radius: 8px;
+    border-left: 3px solid var(--movistar-naranja);
+    font-size: 0.82rem;
+}
+
+/* =================================================================
+   ANIMACIONES
+   ================================================================= */
+@keyframes entrar {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =================================================================
+   TABLAS DE ERRORES DETALLADOS
+   ================================================================= */
+.tabla-errores {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tabla-errores thead th {
+    background: var(--movistar-azul-oscuro);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.tabla-errores tbody tr {
+    border-bottom: 1px solid var(--movistar-gris-200);
+    transition: background 0.15s ease;
+}
+
+.tabla-errores tbody tr:hover {
+    background: var(--movistar-rojo-fondo);
+}
+
+.tabla-errores tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabla-errores td {
+    padding: 7px 12px;
+    color: var(--texto);
+}
+
+.tabla-errores .celda-fila {
+    font-weight: 700;
+    color: var(--movistar-azul);
+    text-align: center;
+    min-width: 70px;
+}
+
+.tabla-errores .celda-valor {
+    font-family: 'Courier New', monospace;
+    color: var(--movistar-rojo);
+    font-weight: 500;
+}
+
+.tabla-errores .celda-error {
+    color: var(--movistar-gris-500);
+    font-size: 0.72rem;
+}
+
+.subtitulo-detalle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--texto);
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.filas-lista {
+    font-size: 0.78rem;
+    color: var(--movistar-azul);
+    font-weight: 600;
+    padding: 6px 0;
+    word-break: break-all;
+}
+
+/* =================================================================
+   PANEL DE CORRECCIONES AUTOMÁTICAS
+   ================================================================= */
+.panel-correcciones {
+    margin-top: 16px;
+    padding: 24px;
+    border-radius: var(--radio);
+    background: var(--superficie);
+    box-shadow: var(--sombra-media);
+    border-left: 4px solid var(--movistar-verde);
+    animation: entrar 0.4s ease-out;
+}
+
+.correcciones-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.correcciones-icono {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--movistar-verde-fondo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.correcciones-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--movistar-verde);
+}
+
+.correcciones-sub {
+    font-size: 0.82rem;
+    color: var(--texto-secundario);
+    margin-top: 2px;
+}
+
+.bloque-correccion {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--movistar-verde-fondo);
+    border-radius: 8px;
+    border-left: 3px solid var(--movistar-verde);
+    font-size: 0.82rem;
+}
+
+.titulo-correccion {
+    font-weight: 600;
+    color: var(--movistar-verde);
+    margin-bottom: 8px;
+}
+
+.tabla-correcciones {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tabla-correcciones thead th {
+    background: #1a6e2e;
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.tabla-correcciones tbody tr {
+    border-bottom: 1px solid rgba(92, 182, 21, 0.15);
+    transition: background 0.15s ease;
+}
+
+.tabla-correcciones tbody tr:hover {
+    background: rgba(92, 182, 21, 0.08);
+}
+
+.tabla-correcciones td {
+    padding: 7px 12px;
+    color: var(--texto);
+}
+
+.celda-valor-original {
+    font-family: 'Courier New', monospace;
+    color: var(--movistar-rojo);
+    font-weight: 500;
+    text-decoration: line-through;
+}
+
+.celda-flecha {
+    text-align: center;
+    font-weight: 700;
+    color: var(--movistar-verde);
+    font-size: 1rem;
+}
+
+.celda-valor-corregido {
+    font-family: 'Courier New', monospace;
+    color: var(--movistar-verde);
+    font-weight: 700;
+}
+
+.celda-mas {
+    text-align: center;
+    color: var(--texto-secundario);
+    font-style: italic;
+    padding: 8px 12px;
+}
+
+/* =================================================================
+   BOTONES DE DESCARGA
+   ================================================================= */
+.acciones-finales {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.boton-descarga {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--movistar-verde), #4a9e10);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion);
+    letter-spacing: 0.2px;
+    box-shadow: 0 4px 16px rgba(92, 182, 21, 0.25);
+}
+
+.boton-descarga:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(92, 182, 21, 0.35);
+}
+
+.boton-descarga:active {
+    transform: translateY(0);
+}
+
+/* =================================================================
+   RESUMEN METADATA
+   ================================================================= */
+.resumen-meta {
+    font-size: 0.78rem;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+/* =================================================================
+   TABLA RESPONSIVA (SCROLL HORIZONTAL EN MÓVIL)
+   ================================================================= */
+.bloque-error,
+.bloque-correccion {
+    overflow-x: auto;
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+.pie-pagina {
+    text-align: center;
+    padding: 24px;
+    color: var(--texto-secundario);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--borde);
+    margin-top: 48px;
+}
+
+/* =================================================================
+   RESPONSIVE
+   ================================================================= */
+@media (max-width: 640px) {
+    .franja-azul {
+        padding: 28px 16px 36px;
+    }
+
+    .contenedor {
+        padding: 0 12px;
+    }
+
+    .tarjeta-carga {
+        padding: 24px;
+    }
+
+    .zona-drop {
+        padding: 32px 16px;
+    }
+
+    .metricas {
+        grid-template-columns: 1fr;
+    }
+
+    .barra-superior {
+        padding: 0 16px;
+    }
+
+    .nombre-app {
+        display: none;
+    }
+
+    .divider-logo {
+        display: none;
+    }
+
+    .tabla-errores,
+    .tabla-correcciones {
+        font-size: 0.7rem;
+    }
+
+    .tabla-errores td,
+    .tabla-correcciones td,
+    .tabla-errores th,
+    .tabla-correcciones th {
+        padding: 5px 8px;
+    }
+}
