@@ -1,17 +1,10 @@
 # =============================================================================
 # Fastrack — Dependencias del Proyecto
 # =============================================================================
-# Instalar con: py -3.12 -m pip install -r requirements.txt
+# Instalar con: pip install -r requirements.txt
 
-# --- Framework API ---
-fastapi>=0.115.0
-uvicorn[standard]>=0.34.0
-python-multipart>=0.0.18
-
-# --- Framework Frontend (BFF) ---
+# --- Framework Web ---
 flask>=3.1.0
-requests>=2.32.0
-gunicorn>=23.0.0
 
 # --- Procesamiento de datos ---
 pandas>=2.2.0
