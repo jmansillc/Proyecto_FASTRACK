@@ -82,6 +82,23 @@ def iniciar_api_background(puerto_api: int):
     uvicorn.run(api, host="127.0.0.1", port=puerto_api, log_level="warning")
 
 
+def esperar_api(puerto_api: int, intentos: int = 10):
+    """Espera a que la API esté lista antes de continuar."""
+    import requests as req
+    url = f"http://127.0.0.1:{puerto_api}/verificar"
+    for i in range(intentos):
+        try:
+            r = req.get(url, timeout=2)
+            if r.status_code == 200:
+                print(f"  API lista (intento {i + 1})")
+                return True
+        except Exception:
+            pass
+        time.sleep(1)
+    print("  ADVERTENCIA: La API no respondió en tiempo esperado")
+    return False
+
+
 if __name__ == "__main__":
     puerto_flask = int(os.environ.get("PORT", 5000))
     puerto_api = int(os.environ.get("API_PORT", 8000))
@@ -93,7 +110,9 @@ if __name__ == "__main__":
         daemon=True
     )
     hilo_api.start()
-    time.sleep(1)  # Dar tiempo a que la API arranque
+
+    # Esperar a que la API esté lista
+    esperar_api(puerto_api)
 
     print("\n" + "=" * 56)
     print("  Fastrack -- Validador de Precios")

@@ -122,7 +122,7 @@ def registrar_rutas(app: Flask):
             respuesta_api = requests.post(
                 URL_API_VALIDACION,
                 files=datos_archivo,
-                timeout=120
+                timeout=300
             )
 
             if respuesta_api.status_code != 200:
@@ -159,7 +159,7 @@ def registrar_rutas(app: Flask):
         Descarga el archivo Excel con las auto-correcciones aplicadas.
         """
         try:
-            respuesta_api = requests.get(URL_API_DESCARGAR, timeout=120)
+            respuesta_api = requests.get(URL_API_DESCARGAR, timeout=300)
 
             if respuesta_api.status_code != 200:
                 return jsonify({
@@ -209,7 +209,7 @@ def registrar_rutas(app: Flask):
             respuesta_api = requests.post(
                 URL_API_APLICAR,
                 files=datos_archivo,
-                timeout=120
+                timeout=300
             )
 
             if respuesta_api.status_code != 200:
