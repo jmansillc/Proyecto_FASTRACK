@@ -115,9 +115,9 @@ def ejecutar_validaciones(contenido_bytes: bytes, nombre_archivo: str) -> dict:
 
     buffer = io.BytesIO(contenido_bytes)
 
-    # --- Validación de estructura ---
+    # --- Validación de estructura (recibe bytes crudos) ---
     resultado_estructura = validar_estructura_excel(
-        buffer, NOMBRE_HOJA, COLUMNAS_REQUERIDAS
+        contenido_bytes, NOMBRE_HOJA, COLUMNAS_REQUERIDAS
     )
 
     if not resultado_estructura.get("es_valido"):
