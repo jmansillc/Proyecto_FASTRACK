@@ -216,18 +216,27 @@ def registrar_rutas(app: Flask):
         error = None
 
         if request.method == "POST":
-            correo = request.form.get("correo")
-            contrasena = request.form.get("contrasena")
-            correo_previo = correo
+            try:
+                correo = request.form.get("correo")
+                contrasena = request.form.get("contrasena")
+                correo_previo = correo
 
-            usuario, msg_error = login_usuario(correo, contrasena)
+                usuario, msg_error = login_usuario(correo, contrasena)
 
-            if usuario:
-                login_user(usuario)
-                registrar_accion(usuario.id, "login", f"Acceso exitoso: {correo}")
-                return redirect(url_for("home"))
-            else:
-                error = msg_error
+                if usuario:
+                    login_user(usuario)
+                    # Intentar registrar acción, pero no bloquear el login si falla la auditoría
+                    try:
+                        registrar_accion(usuario.id, "login", f"Acceso exitoso: {correo}")
+                    except Exception as e_bitacora:
+                        print(f"[ERROR] No se pudo registrar en bitacora: {str(e_bitacora)}")
+
+                    return redirect(url_for("home"))
+                else:
+                    error = msg_error
+            except Exception as e_login:
+                # Si falla aquí, devolvemos el error para no dar un 502 genérico
+                return f"Error crítico durante el login: {str(e_login)}", 500
 
         return render_template("login.html", error=error, correo_previo=correo_previo)
 
