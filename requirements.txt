@@ -3,9 +3,10 @@
 # =============================================================================
 # Instalar con: pip install -r requirements.txt
 
-# --- Framework Web ---
+# --- Framework Web & Producción ---
 flask>=3.1.0
 flask-login>=0.6.0
+gunicorn>=21.2.0
 
 # --- Procesamiento de datos ---
 pandas>=2.2.0
