@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastrack — Iniciar Sesion | Movistar</title>
+    <meta name="description" content="Inicio de sesion — Sistema Fastrack Movistar">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Telefonica+Sans:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body class="pagina-login">
+
+    <!-- ====== BARRA SUPERIOR MOVISTAR ====== -->
+    <header class="barra-superior">
+        <div class="logo-area">
+            <div class="logo-movistar">
+                <div class="logo-m">M</div>
+                <span class="logo-texto">movistar</span>
+            </div>
+            <div class="divider-logo"></div>
+            <span class="nombre-app">Fastrack</span>
+        </div>
+    </header>
+
+    <!-- ====== FONDO DEGRADADO ====== -->
+    <div class="login-fondo">
+        <div class="login-contenedor">
+
+            <!-- Card de login -->
+            <div class="login-card" id="loginCard">
+                <div class="login-icono">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </div>
+
+                <h2 class="login-titulo">Iniciar Sesion</h2>
+                <p class="login-sub">Ingrese sus credenciales para acceder al sistema</p>
+
+                {% if error %}
+                <div class="login-error" id="loginError">
+                    <span class="login-error-icono">!</span>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="/login" id="formLogin">
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="correo">Correo electronico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            class="campo-input"
+                            placeholder="usuario@movistar.com"
+                            required
+                            autocomplete="email"
+                            value="{{ correo_previo or '' }}">
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="contrasena">Contrasena</label>
+                        <input
+                            type="password"
+                            id="contrasena"
+                            name="contrasena"
+                            class="campo-input"
+                            placeholder="Ingrese su contrasena"
+                            required
+                            autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="boton-login" id="botonLogin">
+                        Acceder
+                    </button>
+                </form>
+            </div>
+
+            <p class="login-footer">Telefonica Movistar — Fastrack v3.0 · Uso interno</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

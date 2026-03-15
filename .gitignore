@@ -37,3 +37,6 @@ htmlcov/
 
 # Carpeta legacy
 _legacy/
+
+# Base de datos SQLite
+*.db

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastrack — Administracion | Movistar</title>
+    <meta name="description" content="Panel de administracion — Gestion de usuarios">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Telefonica+Sans:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <!-- ====== BARRA SUPERIOR MOVISTAR ====== -->
+    <header class="barra-superior">
+        <div class="logo-area">
+            <div class="logo-movistar">
+                <div class="logo-m">M</div>
+                <span class="logo-texto">movistar</span>
+            </div>
+            <div class="divider-logo"></div>
+            <span class="nombre-app">Fastrack</span>
+        </div>
+        <div class="usuario-header">
+            <span class="badge-rol rol-admin">Admin</span>
+            <span class="usuario-nombre">{{ usuario.nombre }}</span>
+            <a href="#" onclick="abrirModalPass(); return false;" class="link-perfil">Cambiar Contraseña</a>
+            <a href="/logout" class="boton-logout" title="Cerrar sesion">Salir</a>
+        </div>
+    </header>
+
+    <!-- ====== FRANJA AZUL HERO ====== -->
+    <section class="franja-azul">
+        <div class="franja-contenido">
+            <h1>Gestion de Usuarios</h1>
+            <p>Crear, activar y desactivar cuentas del sistema Fastrack</p>
+        </div>
+    </section>
+
+    <!-- ====== CONTENIDO PRINCIPAL ====== -->
+    <main class="contenedor">
+
+        <!-- Formulario crear usuario -->
+        <div class="tarjeta-carga" id="formCrear">
+            <h3 class="form-titulo">Crear nuevo usuario</h3>
+
+            <div class="form-mensaje" id="mensajeCrear" style="display:none;"></div>
+
+            <form id="formularioUsuario" autocomplete="off">
+                <div class="form-grid">
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="nuevoNombre">Nombre completo</label>
+                        <input type="text" id="nuevoNombre" class="campo-input"
+                            placeholder="Juan Perez" required>
+                    </div>
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="nuevoCorreo">Correo electronico</label>
+                        <input type="email" id="nuevoCorreo" class="campo-input"
+                            placeholder="juan@movistar.com" required>
+                    </div>
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="nuevoRol">Rol</label>
+                        <select id="nuevoRol" class="campo-input" required>
+                            <option value="">Seleccione un rol</option>
+                            <option value="negocio">Negocio</option>
+                            <option value="ti">TI</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="campo-grupo">
+                        <label class="campo-label" for="nuevaContrasena">Contrasena</label>
+                        <input type="password" id="nuevaContrasena" class="campo-input"
+                            placeholder="Minimo 6 caracteres" required minlength="6">
+                    </div>
+                </div>
+                <button type="submit" class="boton-movistar boton-crear-usuario">
+                    Crear usuario
+                </button>
+            </form>
+        </div>
+
+        <!-- Tabla de usuarios -->
+        <div class="seccion-historial" style="margin-top: 24px;">
+            <h3 class="seccion-titulo">Usuarios registrados</h3>
+            <table class="tabla-datos" id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Creado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyUsuarios"></tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="pie-pagina">
+        Telefonica Movistar — Fastrack v3.0 · Uso interno
+    </footer>
+
+    <!-- MODAL CAMBIO PASS -->
+    <div id="modalPass" class="modal-overlay">
+        <div class="modal-caja">
+            <h3 class="modal-titulo">Cambiar Contraseña</h3>
+            <div id="mensajePass" class="form-mensaje" style="display:none;"></div>
+            <form id="formCambiarPass">
+                <div class="campo-grupo">
+                    <label class="campo-label">Contraseña Actual</label>
+                    <input type="password" id="passActual" class="campo-input" required>
+                </div>
+                <div class="campo-grupo" style="margin-top:12px;">
+                    <label class="campo-label">Nueva Contraseña</label>
+                    <input type="password" id="passNueva" class="campo-input" required minlength="6">
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="boton-cancelar" onclick="cerrarModalPass()">Cancelar</button>
+                    <button type="submit" class="boton-movistar">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMACION -->
+    <div id="modalConfirmacion" class="modal-overlay modal-confirmacion">
+        <div class="modal-caja">
+            <h3 id="tituloConfirm" class="modal-titulo">Confirmar</h3>
+            <p id="mensajeConfirm" style="margin-bottom: 20px; color: var(--texto-secundario);"></p>
+            <div class="modal-acciones">
+                <button type="button" class="boton-cancelar" onclick="cerrarConfirmacion()">No, cancelar</button>
+                <button type="button" id="btnConfirmar" class="boton-movistar" onclick="ejecutarConfirmacion()">Si, confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/perfil.js"></script>
+    <script src="/static/js/panel_admin.js"></script>
+
+</body>
+
+</html>

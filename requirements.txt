@@ -5,6 +5,7 @@
 
 # --- Framework Web ---
 flask>=3.1.0
+flask-login>=0.6.0
 
 # --- Procesamiento de datos ---
 pandas>=2.2.0

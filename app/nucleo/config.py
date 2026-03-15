@@ -159,3 +159,25 @@ COLUMNAS_REQUERIDAS = sorted(set(
     COLUMNAS_PRECIO + COLUMNAS_FECHA
 ))
 """Lista completa de todas las columnas que deben existir en el archivo."""
+
+
+# =============================================================================
+# BASE DE DATOS
+# =============================================================================
+
+import os as _os
+
+RUTA_BD = _os.path.join(
+    _os.path.dirname(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))),
+    "fastrack.db",
+)
+"""Ruta al archivo SQLite de la base de datos."""
+
+ADMIN_CORREO = "admin@fastrack.com"
+"""Correo del usuario administrador por defecto."""
+
+ADMIN_NOMBRE = "Administrador"
+"""Nombre del usuario administrador por defecto."""
+
+ADMIN_CONTRASENA = "Admin123!"
+"""Contraseña inicial del administrador (cambiar tras primer login)."""

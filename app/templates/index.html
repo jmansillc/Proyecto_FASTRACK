@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fastrack — Validador de Precios | Movistar</title>
-    <meta name="description" content="Sistema de validación de archivos Excel de precios residenciales — Movistar">
+    <meta name="description" content="Sistema de validacion de archivos Excel de precios residenciales — Movistar">
     <link
         href="https://fonts.googleapis.com/css2?family=Telefonica+Sans:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -24,14 +24,19 @@
             <div class="divider-logo"></div>
             <span class="nombre-app">Fastrack Validador</span>
         </div>
-        <span class="usuario-info">Gestión de Precios</span>
+        <div class="usuario-header">
+            <span class="badge-rol rol-negocio">Negocio</span>
+            <span class="usuario-nombre">{{ usuario.nombre }}</span>
+            <a href="#" onclick="abrirModalPass(); return false;" class="link-perfil">Cambiar Contraseña</a>
+            <a href="/logout" class="boton-logout" title="Cerrar sesion">Salir</a>
+        </div>
     </header>
 
     <!-- ====== FRANJA AZUL HERO ====== -->
     <section class="franja-azul">
         <div class="franja-contenido">
             <h1>Validador de Precios Residenciales</h1>
-            <p>Sube tu archivo Excel para ejecutar validaciones automáticas de calidad de datos</p>
+            <p>Sube tu archivo Excel para ejecutar validaciones automaticas de calidad de datos</p>
         </div>
     </section>
 
@@ -42,7 +47,7 @@
         <div class="tarjeta-carga">
             <div class="zona-drop" id="zonaDrop">
                 <div class="icono-carga">📄</div>
-                <h3>Arrastra tu archivo Excel aquí</h3>
+                <h3>Arrastra tu archivo Excel aqui</h3>
                 <p>o haz clic para seleccionarlo — Solo archivos .xlsx</p>
                 <input type="file" id="inputArchivo" accept=".xlsx">
             </div>
@@ -64,27 +69,108 @@
         <!-- Panel de resumen global -->
         <div class="panel-resumen" id="panelResumen"></div>
 
-        <!-- Panel de correcciones automáticas -->
+        <!-- Panel de correcciones automaticas -->
         <div class="panel-correcciones" id="panelCorrecciones" style="display:none;"></div>
 
-        <!-- Lista de tarjetas de validación -->
+        <!-- Lista de tarjetas de validacion -->
         <div class="lista-validaciones" id="listaValidaciones"></div>
 
-        <!-- Botones de acción finales -->
+        <!-- Botones de accion finales -->
         <div class="acciones-finales" id="accionesFinales" style="display:none;">
             <button class="boton-descarga" id="botonDescargarCorregido">
-                ⬇️ Descargar Excel con correcciones automáticas
+                Descargar Excel con correcciones automaticas
             </button>
+        </div>
+
+        <!-- Boton CARGAR ARCHIVO (solo visible cuando validacion pasa al 100%) -->
+        <div class="acciones-cargar" id="accionesCargar" style="display:none;">
+            <div class="cargar-info">
+                <span class="cargar-icono">✅</span>
+                <span>El archivo paso todas las validaciones y esta listo para carga</span>
+            </div>
+            <button class="boton-cargar" id="botonCargar">
+                Cargar archivo aprobado al sistema
+            </button>
+            <div class="barra-progreso" id="barraCargar" style="display:none;">
+                <div class="relleno"></div>
+            </div>
+        </div>
+
+        <!-- Mensaje de carga exitosa -->
+        <div class="panel-carga-exitosa" id="panelCargaExitosa" style="display:none;">
+            <div class="resumen-cabecera">
+                <div class="resumen-icono" style="background: var(--movistar-verde-fondo);">✅</div>
+                <div>
+                    <div class="resumen-titulo" style="color: var(--movistar-verde);">Archivo cargado exitosamente</div>
+                    <div class="resumen-meta" id="textoCargaExitosa"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historial de mis cargas -->
+        <div class="seccion-historial" id="seccionMisCargas" style="margin-top: 32px;">
+            <h3 class="seccion-titulo">Mis cargas anteriores</h3>
+            <table class="tabla-datos" id="tablaMisCargas" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Archivo</th>
+                        <th>Filas</th>
+                        <th>Errores</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyMisCargas"></tbody>
+            </table>
+            <div class="tabla-vacia" id="sinCargas" style="display:none;">
+                <p>No ha cargado archivos aun</p>
+            </div>
         </div>
 
     </main>
 
     <!-- ====== FOOTER ====== -->
     <footer class="pie-pagina">
-        Telefónica Movistar — Fastrack Validador de Precios v3.0 · Uso interno
+        Telefonica Movistar — Fastrack Validador de Precios v3.0 · Uso interno
     </footer>
 
     <!-- ====== JAVASCRIPT ====== -->
+    <!-- MODAL CAMBIO PASS -->
+    <div id="modalPass" class="modal-overlay">
+        <div class="modal-caja">
+            <h3 class="modal-titulo">Cambiar Contraseña</h3>
+            <div id="mensajePass" class="form-mensaje" style="display:none;"></div>
+            <form id="formCambiarPass">
+                <div class="campo-grupo">
+                    <label class="campo-label">Contraseña Actual</label>
+                    <input type="password" id="passActual" class="campo-input" required>
+                </div>
+                <div class="campo-grupo" style="margin-top:12px;">
+                    <label class="campo-label">Nueva Contraseña</label>
+                    <input type="password" id="passNueva" class="campo-input" required minlength="6">
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="boton-cancelar" onclick="cerrarModalPass()">Cancelar</button>
+                    <button type="submit" class="boton-movistar">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMACION -->
+    <div id="modalConfirmacion" class="modal-overlay modal-confirmacion">
+        <div class="modal-caja">
+            <h3 id="tituloConfirm" class="modal-titulo">Confirmar</h3>
+            <p id="mensajeConfirm" style="margin-bottom: 20px; color: var(--texto-secundario);"></p>
+            <div class="modal-acciones">
+                <button type="button" class="boton-cancelar" onclick="cerrarConfirmacion()">No, cancelar</button>
+                <button type="button" id="btnConfirmar" class="boton-movistar" onclick="ejecutarConfirmacion()">Si, confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/perfil.js"></script>
     <script src="/static/js/app.js"></script>
 
 </body>

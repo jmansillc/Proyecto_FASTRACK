@@ -864,47 +864,416 @@ body {
    RESPONSIVE
    ================================================================= */
 @media (max-width: 640px) {
-    .franja-azul {
-        padding: 28px 16px 36px;
-    }
+    /* ... existing responsive styles ... */
+}
 
-    .contenedor {
-        padding: 0 12px;
-    }
+/* =================================================================
+   PÁGINA DE LOGIN
+   ================================================================= */
+.pagina-login {
+    background: var(--movistar-azul-oscuro);
+    display: flex;
+    flex-direction: column;
+}
 
-    .tarjeta-carga {
-        padding: 24px;
-    }
+.login-fondo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 10% 20%, rgba(1, 157, 244, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(1, 157, 244, 0.1) 0%, transparent 40%);
+    padding: 24px;
+}
 
-    .zona-drop {
-        padding: 32px 16px;
-    }
+.login-contenedor {
+    width: 100%;
+    max-width: 420px;
+}
 
-    .metricas {
-        grid-template-columns: 1fr;
-    }
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radio);
+    padding: 48px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
 
-    .barra-superior {
-        padding: 0 16px;
-    }
+.login-icono {
+    color: var(--movistar-azul);
+    margin-bottom: 24px;
+    display: inline-flex;
+    padding: 16px;
+    background: var(--movistar-cielo);
+    border-radius: 50%;
+}
 
-    .nombre-app {
-        display: none;
-    }
+.login-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--movistar-azul-oscuro);
+}
 
-    .divider-logo {
-        display: none;
-    }
+.login-sub {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    margin-bottom: 32px;
+}
 
-    .tabla-errores,
-    .tabla-correcciones {
-        font-size: 0.7rem;
-    }
+.campo-grupo {
+    text-align: left;
+    margin-bottom: 20px;
+}
 
-    .tabla-errores td,
-    .tabla-correcciones td,
-    .tabla-errores th,
-    .tabla-correcciones th {
-        padding: 5px 8px;
-    }
+.campo-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--movistar-gris-700);
+}
+
+.campo-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--movistar-gris-200);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transicion);
+}
+
+.campo-input:focus {
+    outline: none;
+    border-color: var(--movistar-azul);
+    box-shadow: 0 0 0 4px var(--movistar-cielo);
+}
+
+.boton-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--movistar-azul);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transicion);
+    margin-top: 12px;
+}
+
+.boton-login:hover {
+    background: var(--movistar-azul-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(1, 157, 244, 0.25);
+}
+
+.login-error {
+    background: var(--movistar-rojo-fondo);
+    color: var(--movistar-rojo);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-left: 3px solid var(--movistar-rojo);
+}
+
+.login-footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    margin-top: 32px;
+}
+
+/* =================================================================
+   HEADER USUARIO
+   ================================================================= */
+.usuario-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usuario-nombre {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-rol {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rol-admin { background: #9B51E0; color: white; }
+.rol-negocio { background: var(--movistar-azul); color: white; }
+.rol-ti { background: var(--movistar-verde); color: white; }
+
+.boton-logout {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    transition: var(--transicion);
+}
+
+.boton-logout:hover {
+    color: white;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =================================================================
+   SECCIONES Y TABLAS DEL PANEL
+   ================================================================= */
+.tabla-panel, .seccion-historial {
+    background: var(--superficie);
+    border-radius: var(--radio);
+    padding: 24px;
+    box-shadow: var(--sombra-media);
+    margin-top: 16px;
+}
+
+.seccion-titulo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--movistar-azul-oscuro);
+}
+
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.tabla-datos th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--movistar-gris-100);
+    color: var(--movistar-gris-700);
+    font-weight: 600;
+    border-bottom: 2px solid var(--movistar-gris-200);
+}
+
+.tabla-datos td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--movistar-gris-200);
+}
+
+.tabla-vacia {
+    padding: 48px;
+    text-align: center;
+    color: var(--movistar-gris-500);
+}
+
+.badge-estado {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+}
+
+.estado-validando { background: var(--movistar-naranja-fondo); color: var(--movistar-naranja); }
+.estado-aprobado { background: var(--movistar-cielo); color: var(--movistar-azul); }
+.estado-procesado { background: var(--movistar-verde-fondo); color: var(--movistar-verde); }
+.estado-cargado_bd { background: var(--movistar-verde-fondo); color: var(--movistar-verde); }
+.estado-rechazado { background: var(--movistar-rojo-fondo); color: var(--movistar-rojo); }
+.estado-activo { background: var(--movistar-verde-fondo); color: var(--movistar-verde); }
+.estado-inactivo { background: var(--movistar-gris-200); color: var(--movistar-gris-500); }
+
+/* =================================================================
+   BOTÓN CARGAR (FLUJO NEGOCIO)
+   ================================================================= */
+.acciones-cargar {
+    margin-top: 24px;
+    padding: 32px;
+    background: linear-gradient(135deg, white, var(--movistar-cielo));
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-elevada);
+    border: 2px solid var(--movistar-azul);
+    text-align: center;
+}
+
+.cargar-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--movistar-azul-oscuro);
+}
+
+.boton-cargar {
+    padding: 16px 48px;
+    background: var(--movistar-verde);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transicion);
+    box-shadow: 0 8px 24px rgba(92, 182, 21, 0.3);
+}
+
+.boton-cargar:hover {
+    background: #4a9e10;
+    transform: scale(1.02);
+}
+
+.panel-carga-exitosa {
+    margin-top: 24px;
+    padding: 24px;
+    background: white;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-media);
+    border-left: 4px solid var(--movistar-verde);
+}
+
+/* =================================================================
+   ACCIONES EN TABLAS
+   ================================================================= */
+.boton-accion {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.boton-procesar { background: var(--movistar-azul); color: white; }
+.boton-descargar-sm { background: var(--movistar-gris-200); color: var(--movistar-gris-700); text-decoration: none; display: inline-block; }
+.boton-activar { background: var(--movistar-verde); color: white; }
+.boton-desactivar { background: var(--movistar-naranja); color: white; }
+.boton-reset { background: var(--movistar-azul-medio); color: white; }
+.boton-eliminar { background: var(--movistar-rojo); color: white; }
+
+.boton-movistar {
+    background: var(--movistar-azul);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transicion);
+    display: inline-block;
+    text-align: center;
+}
+
+.boton-movistar:hover {
+    background: var(--movistar-azul-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(1, 157, 244, 0.3);
+}
+
+.boton-crear-usuario {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Admin Form */
+.form-titulo { margin-bottom: 24px; color: var(--movistar-azul-oscuro); }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+}
+
+.form-mensaje {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+.mensaje-exito { background: var(--movistar-verde-fondo); color: var(--movistar-verde); }
+.mensaje-error { background: var(--movistar-rojo-fondo); color: var(--movistar-rojo); }
+
+/* Perfil y Modal */
+.link-perfil {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: var(--transicion);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+}
+.link-perfil:hover { 
+    color: white; 
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(11, 39, 57, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: var(--transicion);
+}
+.modal-overlay.activo { opacity: 1; visibility: visible; }
+
+.modal-caja {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radio);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--sombra-elevada);
+}
+.modal-titulo { margin-bottom: 20px; color: var(--movistar-azul-oscuro); }
+.modal-acciones {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.boton-cancelar {
+    background: var(--movistar-gris-200);
+    color: var(--movistar-gris-700);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Modal de Confirmación */
+.modal-confirmacion .modal-caja {
+    max-width: 350px;
+}
+.modal-confirmacion .modal-acciones {
+    justify-content: center;
+}
+.boton-confirmar-eliminar {
+    background: var(--movistar-rojo);
+    color: white;
 }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastrack — Panel TI | Movistar</title>
+    <meta name="description" content="Panel TI — Archivos pendientes de procesar">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Telefonica+Sans:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <!-- ====== BARRA SUPERIOR MOVISTAR ====== -->
+    <header class="barra-superior">
+        <div class="logo-area">
+            <div class="logo-movistar">
+                <div class="logo-m">M</div>
+                <span class="logo-texto">movistar</span>
+            </div>
+            <div class="divider-logo"></div>
+            <span class="nombre-app">Fastrack</span>
+        </div>
+        <div class="usuario-header">
+            <span class="badge-rol rol-ti">TI</span>
+            <span class="usuario-nombre">{{ usuario.nombre }}</span>
+            <a href="#" onclick="abrirModalPass(); return false;" class="link-perfil">Cambiar Contraseña</a>
+            <a href="/logout" class="boton-logout" title="Cerrar sesion">Salir</a>
+        </div>
+    </header>
+
+    <!-- ====== FRANJA AZUL HERO ====== -->
+    <section class="franja-azul">
+        <div class="franja-contenido">
+            <h1>Archivos Pendientes de Procesar</h1>
+            <p>Archivos validados y aprobados por el area de Negocio, listos para carga a base de datos</p>
+        </div>
+    </section>
+
+    <!-- ====== CONTENIDO PRINCIPAL ====== -->
+    <main class="contenedor">
+
+        <!-- Indicador de pendientes -->
+        <div class="panel-resumen" id="panelConteo" style="display:none;">
+            <div class="resumen-cabecera">
+                <div class="resumen-icono icono-pendiente">📋</div>
+                <div>
+                    <div class="resumen-titulo" id="textoPendientes">Cargando...</div>
+                    <div class="resumen-meta">Actualizado al cargar la pagina</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de archivos pendientes -->
+        <div class="tabla-panel" id="tablaPendientes">
+            <div class="tabla-vacia" id="sinPendientes" style="display:none;">
+                <div class="tabla-vacia-icono">📭</div>
+                <p>No hay archivos pendientes de procesar</p>
+            </div>
+            <table class="tabla-datos" id="tablaArchivos" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Archivo</th>
+                        <th>Subido por</th>
+                        <th>Filas</th>
+                        <th>Fecha subida</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyArchivos"></tbody>
+            </table>
+        </div>
+
+        <!-- Historial de procesados -->
+        <div class="seccion-historial" style="margin-top: 32px;">
+            <h3 class="seccion-titulo">Archivos ya procesados</h3>
+            <table class="tabla-datos" id="tablaProcesados" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Archivo</th>
+                        <th>Subido por</th>
+                        <th>Fecha procesado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyProcesados"></tbody>
+            </table>
+            <div class="tabla-vacia" id="sinProcesados" style="display:none;">
+                <p>No hay archivos procesados aun</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="pie-pagina">
+        Telefonica Movistar — Fastrack v3.0 · Uso interno
+    </footer>
+
+    <!-- MODAL CAMBIO PASS -->
+    <div id="modalPass" class="modal-overlay">
+        <div class="modal-caja">
+            <h3 class="modal-titulo">Cambiar Contraseña</h3>
+            <div id="mensajePass" class="form-mensaje" style="display:none;"></div>
+            <form id="formCambiarPass">
+                <div class="campo-grupo">
+                    <label class="campo-label">Contraseña Actual</label>
+                    <input type="password" id="passActual" class="campo-input" required>
+                </div>
+                <div class="campo-grupo" style="margin-top:12px;">
+                    <label class="campo-label">Nueva Contraseña</label>
+                    <input type="password" id="passNueva" class="campo-input" required minlength="6">
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="boton-cancelar" onclick="cerrarModalPass()">Cancelar</button>
+                    <button type="submit" class="boton-movistar">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMACION -->
+    <div id="modalConfirmacion" class="modal-overlay modal-confirmacion">
+        <div class="modal-caja">
+            <h3 id="tituloConfirm" class="modal-titulo">Confirmar</h3>
+            <p id="mensajeConfirm" style="margin-bottom: 20px; color: var(--texto-secundario);"></p>
+            <div class="modal-acciones">
+                <button type="button" class="boton-cancelar" onclick="cerrarConfirmacion()">No, cancelar</button>
+                <button type="button" id="btnConfirmar" class="boton-movistar" onclick="ejecutarConfirmacion()">Si, confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/perfil.js"></script>
+    <script src="/static/js/panel_ti.js"></script>
+
+</body>
+
+</html>

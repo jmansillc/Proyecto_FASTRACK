@@ -20,6 +20,15 @@ const DOM = {
     listaValidaciones: document.getElementById("listaValidaciones"),
     accionesFinales: document.getElementById("accionesFinales"),
     botonDescargarCorregido: document.getElementById("botonDescargarCorregido"),
+    // Nuevos elementos para flujo de carga
+    accionesCargar: document.getElementById("accionesCargar"),
+    botonCargar: document.getElementById("botonCargar"),
+    barraCargar: document.getElementById("barraCargar"),
+    panelCargaExitosa: document.getElementById("panelCargaExitosa"),
+    textoCargaExitosa: document.getElementById("textoCargaExitosa"),
+    bodyMisCargas: document.getElementById("bodyMisCargas"),
+    tablaMisCargas: document.getElementById("tablaMisCargas"),
+    sinCargas: document.getElementById("sinCargas"),
 };
 
 /** Archivo actualmente seleccionado. */
@@ -111,6 +120,101 @@ DOM.botonDescargarCorregido.addEventListener("click", function () {
 });
 
 // =================================================================
+// FLUJO DE CARGA FINAL A BD
+// =================================================================
+
+DOM.botonCargar.addEventListener("click", async function () {
+    if (!ultimaValidacion || !archivoSeleccionado) return;
+
+    if (!confirm("Esta seguro de cargar este archivo? Una vez cargado, TI podra procesarlo.")) {
+        return;
+    }
+
+    DOM.botonCargar.disabled = true;
+    DOM.barraCargar.style.display = "block";
+
+    try {
+        const resp = await fetch("/cargas/subir", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nombre_archivo: archivoSeleccionado.name,
+                total_filas: ultimaValidacion.resumen.total_registros || 0,
+                total_errores: ultimaValidacion.resumen.validaciones_fallidas || 0,
+                resultado_validacion: ultimaValidacion
+            })
+        });
+
+        const datos = await resp.json();
+
+        if (resp.ok) {
+            DOM.accionesCargar.style.display = "none";
+            DOM.panelCargaExitosa.style.display = "block";
+            DOM.textoCargaExitosa.textContent = `Archivo "${archivoSeleccionado.name}" enviado a TI correctamente. ID: ${datos.id}`;
+            // Limpiar seleccion para evitar doble carga
+            archivoSeleccionado = null;
+            DOM.botonValidar.disabled = true;
+            cargarMisCargas();
+        } else {
+            alert(datos.error || "Error al subir carga");
+            DOM.botonCargar.disabled = false;
+        }
+    } catch (err) {
+        alert("Error de conexion");
+        DOM.botonCargar.disabled = false;
+    } finally {
+        DOM.barraCargar.style.display = "none";
+    }
+});
+
+// =================================================================
+// CARGAR HISTORIAL DE USUARIO
+// =================================================================
+
+async function cargarMisCargas() {
+    try {
+        const resp = await fetch("/cargas/mis-cargas");
+        if (!resp.ok) return;
+        const datos = await resp.json();
+
+        if (datos.length === 0) {
+            DOM.tablaMisCargas.style.display = "none";
+            DOM.sinCargas.style.display = "block";
+            return;
+        }
+
+        DOM.tablaMisCargas.style.display = "table";
+        DOM.sinCargas.style.display = "none";
+        DOM.bodyMisCargas.innerHTML = "";
+
+        datos.forEach(function (c) {
+            const tr = document.createElement("tr");
+            const claseEstado = "estado-" + c.estado;
+            tr.innerHTML = `
+                <td class="celda-fila">${c.id}</td>
+                <td>${escapeHtml(c.nombre_archivo)}</td>
+                <td class="celda-fila">${c.total_filas || 0}</td>
+                <td class="celda-fila">${c.total_errores || 0}</td>
+                <td><span class="badge-estado ${claseEstado}">${c.estado}</span></td>
+                <td>${formatearFecha(c.fecha_subida)}</td>
+            `;
+            DOM.bodyMisCargas.appendChild(tr);
+        });
+    } catch (err) {
+        console.error("Error al cargar historial:", err);
+    }
+}
+
+function formatearFecha(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleDateString("es-CO") + " " + d.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit" });
+}
+
+// Cargar historial al inicio
+document.addEventListener("DOMContentLoaded", cargarMisCargas);
+
+// =================================================================
 // RENDERIZADO
 // =================================================================
 
@@ -197,6 +301,14 @@ function mostrarResultados(datos) {
         const tarjeta = crearTarjeta(v.datos, i);
         DOM.listaValidaciones.appendChild(tarjeta);
     });
+
+    // --- Mostrar boton de carga final si todo esta OK ---
+    if (ok) {
+        DOM.accionesCargar.style.display = "block";
+        DOM.botonCargar.disabled = false;
+    } else {
+        DOM.accionesCargar.style.display = "none";
+    }
 }
 
 /**
@@ -563,7 +675,6 @@ function mostrarError(msg) {
     DOM.panelResumen.style.display = "block";
 }
 
-/** Limpia los resultados. */
 function limpiarResultados() {
     DOM.panelResumen.style.display = "none";
     DOM.panelResumen.innerHTML = "";
@@ -571,5 +682,7 @@ function limpiarResultados() {
     DOM.panelCorrecciones.innerHTML = "";
     DOM.listaValidaciones.innerHTML = "";
     DOM.accionesFinales.style.display = "none";
+    DOM.accionesCargar.style.display = "none";
+    DOM.panelCargaExitosa.style.display = "none";
     ultimaValidacion = null;
 }
