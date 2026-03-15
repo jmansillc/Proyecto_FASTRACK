@@ -35,7 +35,7 @@ async function cargarUsuarios() {
             const claseEstado = u.activo ? "estado-activo" : "estado-inactivo";
             const textoEstado = u.activo ? "Activo" : "Inactivo";
             const textoBoton = u.activo ? "Desactivar" : "Activar";
-            const claseBoton = u.activo ? "boton-desactivar" : "boton-activar";
+            const claseItem = u.activo ? "item-desactivar" : "item-activar";
 
             tr.innerHTML =
                 '<td class="celda-fila">' + u.id + '</td>' +
@@ -44,13 +44,23 @@ async function cargarUsuarios() {
                 '<td><span class="badge-rol rol-' + u.rol + '">' + u.rol + '</span></td>' +
                 '<td><span class="badge-estado ' + claseEstado + '">' + textoEstado + '</span></td>' +
                 '<td>' + formatearFecha(u.fecha_creacion) + '</td>' +
-                '<td>' + formatearFecha(u.fecha_creacion) + '</td>' +
-                '<td class="celda-acciones">' +
-                    '<button class="boton-accion ' + claseBoton + '" onclick="toggleEstado(' + u.id + ', ' + (u.activo ? 'false' : 'true') + ')" title="' + textoBoton + '">' +
-                        '<i class="icon">' + (u.activo ? 'De-act' : 'Activar') + '</i>' +
-                    '</button>' +
-                    '<button class="boton-accion boton-reset" onclick="resetPassword(' + u.id + ')" title="Resetear Contrasena">Reset</button>' +
-                    '<button class="boton-accion boton-eliminar" onclick="borrarUsuario(' + u.id + ', \'' + u.correo + '\')" title="Eliminar Usuario">Eliminar</button>' +
+                '<td class="td-acciones">' +
+                    '<div class="dropdown" id="dropdown-' + u.id + '">' +
+                        '<button class="boton-dropdown" onclick="toggleDropdown(' + u.id + ')">' +
+                            'Acciones ▾' +
+                        '</button>' +
+                        '<div class="dropdown-contenido">' +
+                            '<button class="dropdown-item ' + claseItem + '" onclick="toggleEstado(' + u.id + ', ' + (u.activo ? 'false' : 'true') + ')">' +
+                                (u.activo ? 'De-activar' : 'Activar') +
+                            '</button>' +
+                            '<button class="dropdown-item item-reset" onclick="resetPassword(' + u.id + ')">' +
+                                'Restablecer' +
+                            '</button>' +
+                            '<button class="dropdown-item item-eliminar" onclick="borrarUsuario(' + u.id + ', \'' + u.correo + '\')">' +
+                                'Eliminar' +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
                 '</td>';
             body.appendChild(tr);
         });
@@ -59,6 +69,31 @@ async function cargarUsuarios() {
         console.error("Error:", err);
     }
 }
+
+// =================================================================
+// LÓGICA DROPDOWN
+// =================================================================
+
+function toggleDropdown(id) {
+    const todos = document.querySelectorAll(".dropdown");
+    const actual = document.getElementById("dropdown-" + id);
+    
+    // Cerrar otros
+    todos.forEach(d => {
+        if (d !== actual) d.classList.remove("activo");
+    });
+    
+    // Toggle actual
+    actual.classList.toggle("activo");
+}
+
+// Cerrar dropdown al hacer clic fuera
+window.addEventListener("click", function(e) {
+    if (!e.target.matches(".boton-dropdown")) {
+        const todos = document.querySelectorAll(".dropdown");
+        todos.forEach(d => d.classList.remove("activo"));
+    }
+});
 
 // =================================================================
 // CREAR USUARIO

@@ -1166,6 +1166,101 @@ body {
 .boton-reset { background: var(--movistar-azul-medio); color: white; }
 .boton-eliminar { background: var(--movistar-rojo); color: white; }
 
+/* =================================================================
+   MENU DESPLEGABLE (DROPDOWN) - PANEL ADMIN
+   ================================================================= */
+.td-acciones {
+    position: relative;
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.boton-dropdown {
+    background: var(--movistar-azul);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transicion);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(1, 157, 244, 0.2);
+}
+
+.boton-dropdown:hover {
+    background: var(--movistar-azul-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(1, 157, 244, 0.3);
+}
+
+.dropdown-contenido {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 160px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown.activo .dropdown-contenido {
+    display: block;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    color: var(--movistar-azul-oscuro);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background: rgba(1, 157, 244, 0.08);
+}
+
+.dropdown-item i {
+    font-size: 1rem;
+    width: 18px;
+    text-align: center;
+}
+
+.dropdown-item.item-desactivar { color: var(--movistar-naranja); }
+.dropdown-item.item-activar { color: var(--movistar-verde); }
+.dropdown-item.item-reset { color: var(--movistar-azul-medio); }
+.dropdown-item.item-eliminar { color: var(--movistar-rojo); border-top: 1px solid rgba(0,0,0,0.05); }
+
+.dropdown-item:hover.item-desactivar { background: rgba(255, 144, 0, 0.08); }
+.dropdown-item:hover.item-activar { background: rgba(92, 182, 21, 0.08); }
+.dropdown-item:hover.item-reset { background: rgba(1, 157, 244, 0.08); }
+.dropdown-item:hover.item-eliminar { background: rgba(224, 49, 49, 0.08); }
+
 .boton-movistar {
     background: var(--movistar-azul);
     color: white;
