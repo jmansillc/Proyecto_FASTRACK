@@ -29,13 +29,13 @@ login_manager = LoginManager()
 """Instancia global de LoginManager para configurar en la app."""
 
 login_manager.login_view = "login"
-login_manager.login_message = "Debe iniciar sesion para acceder."
+login_manager.login_message = "Debe iniciar sesion para acceder"
 login_manager.login_message_category = "error"
 
 
-# =============================================================================
+# ==================================================================================================================
 # MODELO DE USUARIO PARA SESIÓN
-# =============================================================================
+# ==================================================================================================================
 
 class UsuarioSesion(UserMixin):
     """
